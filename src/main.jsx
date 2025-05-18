@@ -5,6 +5,7 @@ import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Home from './Pages/Home.jsx';
 import AddCoffee from './components/AddCoffee.jsx';
+import AuthProvider from './AuthContext/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {path: "/", Component: Home, children: [
@@ -20,6 +21,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
   </StrictMode>,
 )
