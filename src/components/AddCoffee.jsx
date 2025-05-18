@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../AuthContext/AuthContext";
 
 const AddCoffee = () => {
+
+    const {coffees, setCoffees} = useContext(AuthContext);
 
     const handleAddCoffee = e => {
         e.preventDefault();
@@ -21,6 +24,9 @@ const AddCoffee = () => {
         .then(data => {
             if(data.insertedId) {
                 console.log("after added to server",data);
+                coffeeData._id = data.insertedId;
+                const newCoffees = [...coffees, coffeeData];
+                setCoffees(newCoffees);
             }
         })
     }
