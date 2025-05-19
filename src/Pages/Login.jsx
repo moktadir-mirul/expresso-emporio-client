@@ -1,29 +1,57 @@
 import React, { useContext } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const { googleProviderAuth } = useContext(AuthContext);
+  const { googleProviderAuth, signInWithEmail } = useContext(AuthContext);
 
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    signInWithEmail(email, password).then(() => {
+      Swal.fire({
+        title: "Log In Successful",
+        icon: "success",
+        draggable: true,
+      });
+    });
+  };
   const handleGoogleLogin = () => {
     googleProviderAuth()
-      .then(() => {
-        
-      })
+      .then(() => {})
       .catch(() => {});
   };
   return (
     <div className="flex justify-center py-10">
-      <fieldset className="fieldset bg-amber-50 border-base-300 rounded-box w-xs border p-4">
+      <form
+        onSubmit={handleSignIn}
+        className="fieldset bg-amber-50 border-base-300 rounded-box w-xs border p-4"
+      >
         <h1 className="text-4xl text-center py-5 font-bold">Log In</h1>
 
         <label className="label">Email</label>
-        <input type="email" className="input" placeholder="Email" />
+        <input
+          type="email"
+          name="email"
+          className="input"
+          placeholder="Email"
+        />
 
         <label className="label">Password</label>
-        <input type="password" className="input" placeholder="Password" />
+        <input
+          type="password"
+          name="password"
+          className="input"
+          placeholder="Password"
+        />
 
-        <button className="btn btn-neutral mt-4">Login</button>
+        <input
+          type="submit"
+          value={"Login"}
+          className="btn btn-neutral mt-4"
+        ></input>
         <h1 className="py-5 text-xl font-medium">
           Don't Have an Account? <br />{" "}
           <Link to={"/signup"} className="underline text-blue-800">
@@ -63,7 +91,7 @@ const Login = () => {
           </svg>
           Login with Google
         </button>
-      </fieldset>
+      </form>
     </div>
   );
 };
