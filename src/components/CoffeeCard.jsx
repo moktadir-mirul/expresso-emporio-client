@@ -1,23 +1,43 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../AuthContext/AuthContext";
 import { Link, Links } from "react-router";
+import Swal from "sweetalert2";
 
 const CoffeeCard = ({ item }) => {
-    const {coffees, setCoffees} = useContext(AuthContext);
+  const { coffees, setCoffees } = useContext(AuthContext);
   const { photoUrl, _id, coffee, barista, taste } = item;
   const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
         fetch(`http://localhost:5000/coffees/${id}`, {
-            method: "DELETE"
+          method: "DELETE",
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.deletedCount){
-                const remainingCoffees = coffees.filter(coffee => coffee._id !== id);
-            setCoffees(remainingCoffees);
-            console.log("after delte",data)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              const remainingCoffees = coffees.filter(
+                (coffee) => coffee._id !== id
+              );
+              setCoffees(remainingCoffees);
+              console.log("after delte", data);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
             }
-        })
-  }
+          });
+      }
+    });
+  };
   return (
     <div>
       <div className="card card-side bg-amber-100 shadow-sm">
@@ -29,9 +49,22 @@ const CoffeeCard = ({ item }) => {
           <p className="font-bold text-base">Barista: {barista}</p>
           <p>Taste: {taste}</p>
           <div className="card-actions justify-end">
-            <Link to={`/coffeedetails/${_id}`}><button className="btn btn-primary bg-amber-700 hover:bg-amber-950">Details</button></Link>
-            <Link to={`/updatecoffee/${_id}`}><button className="btn btn-primary bg-amber-700 hover:bg-amber-950">Edit</button></Link>
-            <button className="btn btn-primary bg-amber-700 hover:bg-amber-950" onClick={() => handleDelete(_id)}>Delete</button>
+            <Link to={`/coffeedetails/${_id}`}>
+              <button className="btn btn-primary bg-amber-700 hover:bg-amber-950">
+                Details
+              </button>
+            </Link>
+            <Link to={`/updatecoffee/${_id}`}>
+              <button className="btn btn-primary bg-amber-700 hover:bg-amber-950">
+                Edit
+              </button>
+            </Link>
+            <button
+              className="btn btn-primary bg-amber-700 hover:bg-amber-950"
+              onClick={() => handleDelete(_id)}
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
