@@ -26,13 +26,13 @@ const router = createBrowserRouter([
     {
       path: "/updatecoffee/:id",
       Component: UpdateCoffee,
-      loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`),
+      loader: ({params}) => fetch(`https://expresso-server-iode0jbg1-mirul-mokradir-khans-projects.vercel.app/coffees/${params.id}`),
       HydrateFallback: FallbackEle
     },
     {
       path: "/coffeedetails/:id",
       Component: CoffeeDetails,
-      loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`),
+      loader: ({params}) => fetch(`https://expresso-server-iode0jbg1-mirul-mokradir-khans-projects.vercel.app/coffees/${params.id}`),
       HydrateFallback: FallbackEle
     },
     {
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
     },
     {
       path: "/users",
-      loader: () => fetch("http://localhost:5000/users"),
+      loader: () => fetch("https://expresso-server-iode0jbg1-mirul-mokradir-khans-projects.vercel.app/users"),
       Component: Users
     }
   ]}

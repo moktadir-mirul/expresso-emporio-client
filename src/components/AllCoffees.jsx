@@ -5,7 +5,7 @@ import CoffeeCard from './CoffeeCard';
 const AllCoffees = () => {
     const {coffees, setCoffees} = useContext(AuthContext)
     useEffect(()=> {
-        fetch("http://localhost:5000/coffees")
+        fetch("https://expresso-server-iode0jbg1-mirul-mokradir-khans-projects.vercel.app/coffees")
         .then((res) => res.json())
         .then(data => {
             setCoffees(data);

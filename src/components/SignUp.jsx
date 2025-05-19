@@ -17,7 +17,7 @@ const SignUp = () => {
     signUpWithEmail(email, password)
       .then(() => {
         
-        fetch("http://localhost:5000/users", {
+        fetch("https://expresso-server-iode0jbg1-mirul-mokradir-khans-projects.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
