@@ -9,7 +9,7 @@ const AllCoffees = () => {
         .then((res) => res.json())
         .then(data => {
             setCoffees(data);
-            console.log(data)
+           
         })
     }, [setCoffees])
     return (

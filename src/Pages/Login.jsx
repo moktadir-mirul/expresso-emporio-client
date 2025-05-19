@@ -7,10 +7,10 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     googleProviderAuth()
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        
       })
-      .catch((err) => console.log(err.message));
+      .catch(() => {});
   };
   return (
     <div className="flex justify-center py-10">

@@ -5,7 +5,7 @@ import { AuthContext } from "../AuthContext/AuthContext";
 
 const UpdateCoffee = () => {
   const upCoffee = useLoaderData();
-  const {coffees, setCoffees} = useContext(AuthContext)
+  const { coffees, setCoffees } = useContext(AuthContext);
   const { photoUrl, _id, coffee, barista, taste, details, supplier } = upCoffee;
   const handleUpdateCoffee = (e) => {
     e.preventDefault();
@@ -23,21 +23,22 @@ const UpdateCoffee = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("after update", data);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Coffee update has been saved",
-          showConfirmButton: false,
-          timer: 1500,
+        if (data) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Coffee update has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        const updatedCoffeeList = coffees.map((coffee) => {
+          if (coffee._id === _id) {
+            return { _id, ...updatedCoffeeData };
+          }
+          return coffee;
         });
-        const updatedCoffeeList = coffees.map(coffee => {
-            if(coffee._id === _id) {
-                return {_id, ...updatedCoffeeData}
-            }
-            return coffee
-        });
-        setCoffees(updatedCoffeeList)
+        setCoffees(updatedCoffeeList);
       });
   };
   return (

@@ -12,6 +12,7 @@ import CoffeeDetails from './components/CoffeeDetails.jsx';
 import FallbackEle from './components/FallbackEle.jsx';
 import Login from './Pages/Login.jsx';
 import SignUp from './components/SignUp.jsx';
+import Users from './Pages/Users.jsx';
 
 const router = createBrowserRouter([
   {path: "/", Component: Home, children: [
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
     {
       path: "/signup",
       Component: SignUp
+    },
+    {
+      path: "/users",
+      loader: () => fetch("http://localhost:5000/users"),
+      Component: Users
     }
   ]}
 ])

@@ -27,7 +27,7 @@ const CoffeeCard = ({ item }) => {
                 (coffee) => coffee._id !== id
               );
               setCoffees(remainingCoffees);
-              console.log("after delte", data);
+              
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",

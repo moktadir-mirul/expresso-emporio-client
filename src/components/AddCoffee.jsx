@@ -10,7 +10,7 @@ const AddCoffee = () => {
         const form = e.target;
         const formData = new FormData(form);
         const coffeeData = Object.fromEntries(formData.entries());
-        console.log(coffeeData);
+        
 
         // Adding in the server
         fetch("http://localhost:5000/coffees", {
@@ -23,7 +23,7 @@ const AddCoffee = () => {
         .then(res => res.json())
         .then(data => {
             if(data.insertedId) {
-                console.log("after added to server",data);
+                
                 coffeeData._id = data.insertedId;
                 const newCoffees = [...coffees, coffeeData];
                 setCoffees(newCoffees);

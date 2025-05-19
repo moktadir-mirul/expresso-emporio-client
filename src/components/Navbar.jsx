@@ -4,12 +4,12 @@ import { AuthContext } from "../AuthContext/AuthContext";
 
 const Navbar = () => {
   const { userInfo, signOutHandler } = useContext(AuthContext);
-  console.log(userInfo);
+  
 
   const handleSignOut = () => {
     signOutHandler()
-    .then(res => console.log(res))
-    .catch(err => console.log(err.message))
+    .then(() => {})
+    .catch(() => {})
   }
 
   return (
@@ -30,7 +30,7 @@ const Navbar = () => {
             <img className="w-14 h-14 rounded-full ring-2 ring-blue-600" src={userInfo.photoURL} alt="" />
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center gap-2">
-            <h1>{userInfo.displayName}</h1>
+            <h1>{userInfo.email}</h1>
           <button className="btn btn-lg" onClick={handleSignOut}>Log Out</button>
           </div>
         </div>
