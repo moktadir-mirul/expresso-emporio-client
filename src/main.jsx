@@ -10,6 +10,8 @@ import AllCoffees from './components/AllCoffees.jsx';
 import UpdateCoffee from './components/UpdateCoffee.jsx';
 import CoffeeDetails from './components/CoffeeDetails.jsx';
 import FallbackEle from './components/FallbackEle.jsx';
+import Login from './Pages/Login.jsx';
+import SignUp from './components/SignUp.jsx';
 
 const router = createBrowserRouter([
   {path: "/", Component: Home, children: [
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       Component: CoffeeDetails,
       loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`),
       HydrateFallback: FallbackEle
+    },
+    {
+      path: "/login",
+      Component: Login
+    }, 
+    {
+      path: "/signup",
+      Component: SignUp
     }
   ]}
 ])
