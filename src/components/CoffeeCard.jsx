@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../AuthContext/AuthContext";
+import { Link, Links } from "react-router";
 
 const CoffeeCard = ({ item }) => {
     const {coffees, setCoffees} = useContext(AuthContext);
@@ -28,8 +29,8 @@ const CoffeeCard = ({ item }) => {
           <p className="font-bold text-base">Barista: {barista}</p>
           <p>Taste: {taste}</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary bg-amber-700 hover:bg-amber-950">Details</button>
-            <button className="btn btn-primary bg-amber-700 hover:bg-amber-950">Edit</button>
+            <Link to={`/coffeedetails/${_id}`}><button className="btn btn-primary bg-amber-700 hover:bg-amber-950">Details</button></Link>
+            <Link to={`/updatecoffee/${_id}`}><button className="btn btn-primary bg-amber-700 hover:bg-amber-950">Edit</button></Link>
             <button className="btn btn-primary bg-amber-700 hover:bg-amber-950" onClick={() => handleDelete(_id)}>Delete</button>
           </div>
         </div>

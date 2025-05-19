@@ -6,6 +6,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import Home from './Pages/Home.jsx';
 import AddCoffee from './components/AddCoffee.jsx';
 import AuthProvider from './AuthContext/AuthProvider.jsx';
+import AllCoffees from './components/AllCoffees.jsx';
+import UpdateCoffee from './components/UpdateCoffee.jsx';
+import CoffeeDetails from './components/CoffeeDetails.jsx';
+import FallbackEle from './components/FallbackEle.jsx';
 
 const router = createBrowserRouter([
   {path: "/", Component: Home, children: [
@@ -15,6 +19,18 @@ const router = createBrowserRouter([
     {
       path: "/addcoffee",
       Component: AddCoffee
+    },
+    {
+      path: "/updatecoffee/:id",
+      Component: UpdateCoffee,
+      loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`),
+      HydrateFallback: FallbackEle
+    },
+    {
+      path: "/coffeedetails/:id",
+      Component: CoffeeDetails,
+      loader: ({params}) => fetch(`http://localhost:5000/coffees/${params.id}`),
+      HydrateFallback: FallbackEle
     }
   ]}
 ])
